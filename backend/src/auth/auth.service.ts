@@ -31,6 +31,6 @@ export class AuthService {
       fcm_token: user.fcm_token ?? null,
     };
     const accessToken = await this.jwtService.signAsync(result);
-    return accessToken;
+    return { accessToken: accessToken };
   }
 }
