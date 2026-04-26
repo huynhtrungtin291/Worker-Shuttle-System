@@ -52,7 +52,7 @@ Hạng mục:
 
 - Đăng nhập/đăng xuất (Worker, Driver, Dispatcher, Admin).
 - RBAC: role + permission theo module.
-- Quản lý tài khoản (tạo, khóa/mở khóa, gán vai trò).
+->>>> Quản lý tài khoản (tạo, khóa/mở khóa, gán vai trò).
 - Session timeout/auto logout policy.
 
 DoD:
