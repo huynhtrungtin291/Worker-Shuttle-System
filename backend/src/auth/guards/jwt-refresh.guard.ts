@@ -1,20 +1,16 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Request } from 'express';
 import { JwtPayload } from '../../common/interface/jwtpayload.interface';
-
-type RefreshRequest = Request<Record<string, string>, unknown, { refreshToken?: string }> & {
-  user?: JwtPayload;
-  refreshToken?: string;
-};
+import { RefreshRequest } from '../../common/types/request-context.type';
 
 @Injectable()
 export class JwtRefreshGuard implements CanActivate {
   private readonly refreshSecret = process.env.JWT_REFRESH_SECRET || 'your_jwt_refresh_secret_key';
-
   constructor(private readonly jwtService: JwtService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    console.log('JWT Refresh Secret:', this.refreshSecret); // Debug log to check the secret value
+
     const request: RefreshRequest = context.switchToHttp().getRequest();
     const token = this.extractRefreshToken(request);
 

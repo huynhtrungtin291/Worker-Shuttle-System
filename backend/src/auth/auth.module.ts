@@ -11,8 +11,8 @@ import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
   imports: [
     JwtModule.register({
       global: true,
-      secret: 'your_jwt_secret_key',
-      signOptions: { expiresIn: '1h' },
+      secret: process.env.JWT_ACCESS_SECRET || 'defaultAccessSecret',
+      signOptions: { expiresIn: '40s' },
     }),
     UsersModule,
   ],

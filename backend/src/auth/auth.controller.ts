@@ -34,8 +34,7 @@ export class AuthController {
     return this.authService.logout(user.username);
   }
 
-  // @UseGuards(AuthGuard)
-  // @Public()
+  // @UseGuards(JwtRefreshGuard)
   // @Post('test')
   // test(@Req() req: Request) {
   //   const user: object = req['user']; // Access the user information from the request object
