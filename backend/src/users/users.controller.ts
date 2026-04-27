@@ -15,4 +15,12 @@ export class UsersController {
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
   }
+
+  @UseGuards(RolesGuard)
+  @Roles(UserActor.ADMIN)
+  @Post('set-account-status')
+  setAccountStatus(@Body() body: { username: string; is_active: boolean }) {
+    const { username, is_active } = body;
+    return this.usersService.setAccountStatus(username, is_active);
+  }
 }

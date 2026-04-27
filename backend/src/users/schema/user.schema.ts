@@ -48,6 +48,9 @@ export class User {
   @Prop({ default: null })
   last_login_at?: Date;
 
+  @Prop({ default: null, select: false })
+  refresh_token_hash?: string | null;
+
   created_at: Date;
   updated_at: Date;
 }

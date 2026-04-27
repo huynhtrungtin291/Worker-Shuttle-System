@@ -65,4 +65,27 @@ export class UsersService {
     const user = await this.userModel.findOne({ username }, { password: 1 }).exec();
     return user ? user.password : null;
   }
+
+  async isActive(username: string): Promise<boolean> {
+    const user = await this.userModel.findOne({ username }, { is_active: 1 }).exec();
+    return user ? user.is_active : false;
+  }
+
+  async setAccountStatus(username: string, isActive: boolean): Promise<void> {
+    await this.userModel.updateOne({ username }, { is_active: isActive }).exec();
+  }
+
+  async getRefreshTokenHashByUsername(username: string): Promise<string | null> {
+    const user = await this.userModel.findOne({ username }, { refresh_token_hash: 1 }).exec();
+
+    return user?.refresh_token_hash ?? null;
+  }
+
+  async updateRefreshTokenHash(username: string, hash: string): Promise<void> {
+    await this.userModel.updateOne({ username }, { refresh_token_hash: hash }).exec();
+  }
+
+  async clearRefreshTokenHash(username: string): Promise<void> {
+    await this.userModel.updateOne({ username }, { refresh_token_hash: null }).exec();
+  }
 }
