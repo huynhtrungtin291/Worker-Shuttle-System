@@ -52,14 +52,14 @@ Hạng mục:
 
 - Đăng nhập/đăng xuất (Worker, Driver, Dispatcher, Admin).
 - RBAC: role + permission theo module.
-->>>> Quản lý tài khoản (tạo, khóa/mở khóa, gán vai trò).
+- Quản lý tài khoản (tạo, khóa/mở khóa, gán vai trò).
 - Session timeout/auto logout policy.
 
 DoD:
 
 - Admin tạo tài khoản và gán role.
 - Mọi endpoint được bảo vệ bởi guard theo role.
-
+---> complete phase 1
 ### Phase 2 - Danh mục & Cấu hình hệ thống (Admin)
 
 Mục tiêu: Có dữ liệu nền để vận hành.
