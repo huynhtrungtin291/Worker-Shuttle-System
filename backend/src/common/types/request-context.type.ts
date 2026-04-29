@@ -9,3 +9,8 @@ export type RefreshRequest = Request<Record<string, string>, unknown, { refreshT
   user?: JwtPayload;
   refreshToken?: string;
 };
+
+export type AccessRequest = Request<Record<string, string>, unknown, { accessToken?: string }> & {
+  user?: JwtPayload;
+  accessToken?: string;
+};

@@ -7,6 +7,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { APP_GUARD } from '@nestjs/core/constants';
 import { RolesGuard } from './guards/role.guard';
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
+import { JwtAccessGuard } from './guards/jwt-access.guard';
 @Module({
   imports: [
     JwtModule.register({
@@ -19,6 +20,7 @@ import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
   providers: [
     AuthService,
     JwtRefreshGuard,
+    JwtAccessGuard,
     {
       provide: APP_GUARD,
       useClass: AuthGuard,

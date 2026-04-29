@@ -10,7 +10,6 @@ export class JwtRefreshGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     console.log('JWT Refresh Secret:', this.refreshSecret); // Debug log to check the secret value
-
     const request: RefreshRequest = context.switchToHttp().getRequest();
     const token = this.extractRefreshToken(request);
 
