@@ -37,10 +37,11 @@ export class UsersService {
       };
     } catch (error: unknown) {
       if (typeof error === 'object' && error !== null && 'code' in error && error.code === 11000) {
-        throw new ConflictException('Tài khoản đã tồn tại');
+        const dataError = createUserDto;
+        throw new ConflictException(`Tài khoản đã tồn tại với dữ liệu: ${JSON.stringify(dataError)}`);
       }
 
-      throw new InternalServerErrorException('Không thể tạo tài khoản');
+      throw new InternalServerErrorException(`Không thể tạo tài khoản ${JSON.stringify(createUserDto)}`);
     }
   }
 
@@ -87,5 +88,10 @@ export class UsersService {
 
   async clearRefreshTokenHash(username: string): Promise<void> {
     await this.userModel.updateOne({ username }, { refresh_token_hash: null }).exec();
+  }
+
+  async getIdByUsername(username: string): Promise<string | null> {
+    const user = await this.userModel.findOne({ username }, { _id: 1 }).exec();
+    return user ? user._id.toString() : null;
   }
 }
