@@ -19,22 +19,15 @@ export class WeeklyRegistration {
 
   @Prop({
     type: String,
-    enum: ['to_factory', 'from_factory', 'both'],
-    required: true,
-  })
-  direction: 'to_factory' | 'from_factory' | 'both';
-
-  @Prop({
-    type: String,
     enum: ['registered', 'cancelled', 'missed'],
     default: 'registered',
   })
   status: 'registered' | 'cancelled' | 'missed';
 
-  @Prop({ type: String, default: null })
+  @Prop({ type: String })
   cancel_reason?: string | null;
 
-  @Prop({ type: Date, default: null })
+  @Prop({ type: Date })
   cancelled_at?: Date | null;
 
   @Prop({ type: Number })
