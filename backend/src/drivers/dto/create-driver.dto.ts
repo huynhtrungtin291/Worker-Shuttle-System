@@ -10,8 +10,4 @@ export class CreateDriverDto {
   @IsOptional()
   @IsDateString()
   license_expires_at?: string;
-
-  @IsOptional()
-  @IsString()
-  default_vehicle_id?: string;
 }
