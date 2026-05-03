@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './schema/user.schema';
+import { UserStatusDto } from './dto/user-status.dto';
 
 @Injectable()
 export class UsersService {
@@ -72,8 +73,10 @@ export class UsersService {
     return user ? user.is_active : false;
   }
 
-  async setAccountStatus(username: string, isActive: boolean): Promise<void> {
-    await this.userModel.updateOne({ username }, { is_active: isActive }).exec();
+  async setAccountStatus(userStatusDto: UserStatusDto): Promise<{ message: string }> {
+    const { username, is_active } = userStatusDto;
+    await this.userModel.updateOne({ username }, { is_active }).exec();
+    return { message: `Tài khoản ${username} đã được ${is_active ? 'kích hoạt' : 'khóa'}` };
   }
 
   async getRefreshTokenHashByUsername(username: string): Promise<string | null> {

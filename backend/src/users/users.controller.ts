@@ -4,6 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UserActor } from '../common/enums/actor.enum';
 import { Roles } from '../auth/decorators/role.decorator';
 import { RolesGuard } from '../auth/guards/role.guard';
+import { UserStatusDto } from './dto/user-status.dto';
 
 @Controller('users')
 export class UsersController {
@@ -19,8 +20,7 @@ export class UsersController {
   @UseGuards(RolesGuard)
   @Roles(UserActor.ADMIN)
   @Post('set-account-status')
-  setAccountStatus(@Body() body: { username: string; is_active: boolean }) {
-    const { username, is_active } = body;
-    return this.usersService.setAccountStatus(username, is_active);
+  setAccountStatus(@Body() userStatusDto: UserStatusDto) {
+    return this.usersService.setAccountStatus(userStatusDto);
   }
 }
