@@ -16,19 +16,22 @@ export class DriversService {
     // 1. Tạo tài khoản người dùng
     const userResult = await this.usersService.createUser(createDriverWithUserDto.createUserDto);
     const userId = userResult.data.id; // Lấy user_id vừa tạo
-    await this.createDriver(createDriverWithUserDto, userId.toString()); // Tạo driver với user_id vừa lấy được
+    const driverResult = await this.createDriver(createDriverWithUserDto, userId.toString()); // Tạo driver với user_id vừa lấy được
     // Kiểm tra xem tài khoản đã tồn tại chưa
+    return driverResult;
   }
 
-  async createDriver(createDriverDto: CreateDriverWithUserDto, userId: string): Promise<Driver> {
+  async createDriver(createDriverWithUserDto: CreateDriverWithUserDto, userId: string): Promise<Driver> {
     // 2. Tạo driver với user_id
-    const isLicenseNumberExist = await this.isLicenseNumberExist(createDriverDto.createDriverDto.license_number);
+    const isLicenseNumberExist = await this.isLicenseNumberExist(
+      createDriverWithUserDto.createDriverDto.license_number,
+    );
     if (isLicenseNumberExist) {
       throw new ConflictException('Số bằng lái đã tồn tại');
     }
     try {
       const driver = new this.driverModel({
-        ...createDriverDto,
+        ...createDriverWithUserDto.createDriverDto,
         user_id: userId,
       });
       return await driver.save();

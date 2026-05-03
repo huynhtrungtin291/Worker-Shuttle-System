@@ -1,8 +1,7 @@
 import { IsDefined, ValidateNested } from 'class-validator';
 import { CreateDriverDto } from './create-driver.dto';
 import { CreateUserDto } from '../../users/dto/create-user.dto';
-import { Type } from 'class-transformer/types/decorators/type.decorator';
-
+import { Type } from 'class-transformer';
 export class CreateDriverWithUserDto {
   @IsDefined()
   @ValidateNested()

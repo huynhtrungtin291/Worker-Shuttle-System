@@ -1,4 +1,4 @@
-import { Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { DriversService } from './drivers.service';
 import { CreateDriverWithUserDto } from './dto/create-driver-account.dto';
 import { Roles } from '../auth/decorators/role.decorator';
@@ -11,7 +11,7 @@ export class DriversController {
   @UseGuards(RolesGuard)
   @Roles(UserActor.ADMIN)
   @Post('create-with-user')
-  async createDriverWithUser(createDriverWithUserDto: CreateDriverWithUserDto): Promise<any> {
+  createDriverWithUser(@Body() createDriverWithUserDto: CreateDriverWithUserDto): Promise<any> {
     return this.driversService.createDriverWithUser(createDriverWithUserDto);
   }
 }
