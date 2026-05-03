@@ -13,7 +13,7 @@ import { JwtAccessGuard } from './guards/jwt-access.guard';
     JwtModule.register({
       global: true,
       secret: process.env.JWT_ACCESS_SECRET || 'defaultAccessSecret',
-      signOptions: { expiresIn: '40s' },
+      signOptions: { expiresIn: '2h' },
     }),
     UsersModule,
   ],
